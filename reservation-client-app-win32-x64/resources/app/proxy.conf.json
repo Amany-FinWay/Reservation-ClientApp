@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "https://ocr2-demo-oc.hospitality-api.us-ashburn-1.ocs.oc-test.com",
-    "secure": false,
-    "changeOrigin": true
-  }
-}
