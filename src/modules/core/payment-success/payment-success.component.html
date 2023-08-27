@@ -1,0 +1,10 @@
+<div class="container w-75 mt-5">
+  <h3 class="mb-4 w-75 text-secondary text-start">Payment Successful</h3>
+  <div class="card w-75 p-3 border-0">
+    <div class="card-body p-2">
+      <h4 class="card-title">Payment Processed Successfully</h4>
+      <h5 class="card-text text-secondary">With Total of <b class="text-dark">{{(this.reservationService.reservationDetails!.depatureDate! | daysBetween: this.reservationService.reservationDetails!.arrivalDate!) * reservationService.reservationDetails!.costPerNight!}}$</b></h5>
+    </div>
+    <img src="assets/success.gif" class="text-center m-auto w-100 my-3" alt="success">
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="container w-75 mt-5">
+  <h3 class="mb-4 w-75 text-secondary text-start">Please present Your Card</h3>
+  <div class="card w-75 p-3 border-0">
+    <div class="card-body p-2">
+      <h4 class="card-title">Full Amount</h4>
+      <h5 class="card-text text-secondary">With Total of <b class="text-dark">{{(this.reservationService.reservationDetails!.depatureDate! | daysBetween: this.reservationService.reservationDetails!.arrivalDate!) * reservationService.reservationDetails!.costPerNight! | number: '1.0-0'}}$</b> for the {{ this.reservationService.reservationDetails!.depatureDate! | daysBetween: this.reservationService.reservationDetails!.arrivalDate! }} nights</h5>
+    </div>
+    <img src="assets/insert-card-imageonline.co-3559139.gif" class="card-img-bottom" alt="insert-card-or-chip" (click)="onInsertPIN()">
+  </div>
+</div>

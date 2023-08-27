@@ -1,0 +1,19 @@
+.app-container{
+  background-image: url('../assets/main-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: calc(100vh - 95px);
+  .aside-bg{
+    position: relative;
+    video {
+      position: absolute;
+      object-fit: cover;
+      min-height: calc(89vh - -3px);
+      left: 16.75%;
+      border-radius: 0% 100% 0% 100%/65% 0% 100% 50%;
+    }
+
+  }
+}

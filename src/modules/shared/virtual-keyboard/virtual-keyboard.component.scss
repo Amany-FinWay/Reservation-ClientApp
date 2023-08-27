@@ -1,0 +1,25 @@
+.simple-keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  padding: 0;
+  &.active {
+    z-index: 1;
+    height: 230px;
+    padding: 5px;
+    transition: height .3s ease-in-out;
+  }
+  ::ng-deep .hg-row:has(.numButton) {
+    display: block;
+    .numButton {
+      width: calc(16.67% - 5px);
+      display: inline-block;
+      height: 110px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+      padding-top: 35px;
+    }
+  }
+}
