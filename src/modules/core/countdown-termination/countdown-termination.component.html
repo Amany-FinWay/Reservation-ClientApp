@@ -1,0 +1,8 @@
+<div class="modal-body text-center pt-5 pb-4">
+    <h3>This session will end in</h3>
+    <h4>{{appSettingService.counter}}&nbsp;Seconds</h4>
+</div>
+<div class="modal-footer border-0 justify-content-around align-item-center">
+    <button type="button" class="btn text-white border-0 py-2 termination" (click)="exitPopUp()">Termination</button>
+    <button type="button" class="btn btn-primary border-0 py-2 col-3" (click)="waitPopup()">Wait</button>
+</div>

@@ -10,4 +10,5 @@ export interface ReservationDetailsModel {
   numberOfDays?: number;
   costPerNight?: number;
   total?: number;
+  roomKey?: string;
 }

@@ -10,7 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { LoaderSpinnerComponent } from './loader-spinner/loader-spinner.component';
 import { SharedModule } from "../shared/shared.module";
 import { InsertPinComponent } from './insert-pin/insert-pin.component';
-
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { ReceiveRoomKeyComponent } from './receive-room-key/receive-room-key.component';
+import { CountdownTerminationComponent } from './countdown-termination/countdown-termination.component';
+import { PickRoomComponent } from './pick-room/pick-room.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,18 +24,24 @@ import { InsertPinComponent } from './insert-pin/insert-pin.component';
     PaymentSuccessComponent,
     HeaderComponent,
     LoaderSpinnerComponent,
-    InsertPinComponent
+    InsertPinComponent,
+    SplashScreenComponent,
+    ReceiveRoomKeyComponent,
+    CountdownTerminationComponent,
+    PickRoomComponent
   ],
   exports: [
     InsertBookingIdComponent,
     HeaderComponent,
-    LoaderSpinnerComponent
+    LoaderSpinnerComponent,
+    SplashScreenComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ]
 })
 export class CoreModule { }

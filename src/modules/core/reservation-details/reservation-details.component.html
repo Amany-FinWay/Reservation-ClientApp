@@ -1,7 +1,7 @@
-<div class="container w-75 mt-5">
-  <h3 class="mb-4 w-75 text-secondary text-start">Your Reservation Information</h3>
+<div class="container w-75">
+  <h3 class="mb-2 w-75 text-secondary text-start">Your Reservation Information</h3>
   <div class="card w-75 p-3 border-0">
-    <div class="card-body p-2">
+    <div class="card-body p-1">
       <div class="border-bottom mb-2">
         <h5>Full Name</h5>
         <p class="mb-2 text-secondary">{{reservationService.reservationDetails!.fullName}}</p>
@@ -22,15 +22,33 @@
         <h5>Room Type</h5>
         <p class="mb-2 text-secondary">{{reservationService.reservationDetails!.roomType}} ({{reservationService.reservationDetails!.numberOfAdults}} Audlts, {{reservationService.reservationDetails!.numberOfChildren}} Children)</p>
       </div>
-      <div class="mb-2">
+      <div class="border-bottom mb-2">
         <h5>Rate per Night</h5>
         <p class="mb-2 text-secondary">{{reservationService.reservationDetails!.costPerNight | number: '1.0-0'}}$</p>
+      </div>
+      <div class="mb-0">
+        <h5>Room Number</h5>
+        <div class="row justify-content-between align-items-center">
+          <div class="col-6">
+            <p class="mb-0 text-secondary">{{this.reservationService.reservationDetails!.roomKey}}</p>
+          </div>
+          <div class="col-6 text-end">
+            <button class="btn btn-primary" (click)="onPickRoom()">
+              <ng-container *ngIf="!areRoomsAvailable">
+                Select Room
+              </ng-container>
+              <ng-container *ngIf="areRoomsAvailable">
+                <i class="fas fa-spinner fa-spin"></i>
+              </ng-container>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="text-center w-75">
-    <button class="btn text-white rounded rounded-pill w-50 py-3 px-5 fs-5 text-uppercase mt-3" (click)="onPresentCard()">
-      <i class="fa fa-long-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Pay
+    <button class="btn text-white rounded rounded-pill w-50 py-3 px-5 fs-5 text-uppercase mt-2" (click)="onPresentCard()" [disabled]="this.reservationService.reservationDetails!.roomKey == undefined">
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Pay
     </button>
   </div>
 </div>

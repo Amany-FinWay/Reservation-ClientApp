@@ -15,7 +15,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron-packager": "ng build --base-href ./ && electron-packager . --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src --overwrite  -configuration=production   --ignore=/angular-webpack  --ignore=/babel-webpack --aot"
+    "electron-packager": "ng build --base-href ./ && electron-packager . --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src --overwrite  -configuration=production --ignore=/angular-webpack --ignore=/babel-webpack --aot"
   },
   "private": true,
   "dependencies": {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VirtualKeyboardService } from 'src/services/virtual-keyboard.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSettingService } from 'src/services/appSetting.service';
@@ -21,7 +21,7 @@ export class InsertBookingIdComponent implements OnInit{
   (
     private virtualKeyboardService: VirtualKeyboardService,
     private http: HttpClient,
-    private appSetting: AppSettingService,
+    private appSettingService: AppSettingService,
     private loader: LoadingSpinnerService,
     private reservationService: ReservationService,
     private router: Router,
@@ -30,7 +30,7 @@ export class InsertBookingIdComponent implements OnInit{
 
     ngOnInit(): void {
       this.bookingIDForm = new FormGroup({
-        bookingID: new FormControl('')
+        bookingID: new FormControl('', [Validators.required])
       })
     }
 
@@ -55,10 +55,10 @@ export class InsertBookingIdComponent implements OnInit{
     this.loader.start();
     const bookingID = this.bookingIDForm.controls['bookingID'].value;
     // Use this to run local
-    const url = `${this.appSetting.usedApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
+    // const url = `${this.appSettingService.usedApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
 
     // Use this to run Electron
-    // const url = `${this.appSetting.baseOperaApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
+    const url = `${this.appSettingService.baseOperaApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
 
     const headers = new HttpHeaders()
       .set('Accept', '*/*')
@@ -74,7 +74,6 @@ export class InsertBookingIdComponent implements OnInit{
         if (res == null) {
           this.alertService.fire(null, 'Oops...', 'No reservations found for this ID' , 'error');
         } else {
-          debugger
           this.reservationService.reservationDetails =  {
             createdDateTime: res.reservations.reservation[0].createDateTime,
             fullName: res.reservations.reservation[0].reservationGuests[0].profileInfo.profile.customer.personName[0]?.givenName + ' ' + res.reservations.reservation[0].reservationGuests[0].profileInfo.profile.customer.personName[0].surname,

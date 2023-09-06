@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppSettingService {
+  counter: number = 60;
+  isBeenAMinute: boolean = false;
+
   //cosrProxyServer= 'http://localhost:9090/';
   baseOperaApiUrl = 'https://ocr2-demo-oc.hospitality-api.us-ashburn-1.ocs.oc-test.com/';
 

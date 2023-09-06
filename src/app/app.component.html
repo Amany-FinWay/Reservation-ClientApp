@@ -1,7 +1,9 @@
+<div class="app-content" (click)="onIntercatWithScreen()">
 <app-header></app-header>
 <div class="container-fluid app-container">
+  <app-splash-screen *ngIf="appSettingService.isBeenAMinute === true"></app-splash-screen>
   <div class="row justify-content-between">
-    <div class="contianer-fluid mt-5 mx-auto col-8 px-0 mx-2 full-height">
+    <div class="contianer-fluid mt-lg-4 mx-auto col-8 px-0 mx-2 full-height">
       <router-outlet></router-outlet>
     </div>
     <div class="col-3 p-0 aside-bg">
@@ -14,3 +16,4 @@
 </div>
 <app-loader-spinner></app-loader-spinner>
 <app-virtual-keyboard></app-virtual-keyboard>
+</div>

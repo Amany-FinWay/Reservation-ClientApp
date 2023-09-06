@@ -1,0 +1,15 @@
+.splash-screen-bg {
+    z-index: 9;
+    min-height: calc(100vh - 95px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    video {
+        object-fit: cover;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: calc(100vh - 686px);
+        left: 0;
+    }
+}

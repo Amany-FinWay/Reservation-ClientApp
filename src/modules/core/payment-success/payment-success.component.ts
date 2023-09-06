@@ -18,7 +18,7 @@ export class PaymentSuccessComponent implements OnInit{
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/receive-room']);
     }, 5000);
   }
 }

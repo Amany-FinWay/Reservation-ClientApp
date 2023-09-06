@@ -15,7 +15,7 @@ mainWindow = new BrowserWindow({
         nodeIntegration: false,
         webviewTag: true,
         worldSafeExecuteJavaScript: true,
-        devTools: true,
+        devTools: false,
         enableRemoteModule: true,
 
     }
