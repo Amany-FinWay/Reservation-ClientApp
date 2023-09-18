@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSettingService } from 'src/services/appSetting.service';
 import { Router } from '@angular/router';
 import { ModalService } from 'src/services/modal.service';
+import { AppConfig } from 'src/environments/AppConfig';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,12 +13,14 @@ export class AppComponent implements OnInit {
   title = 'Reservation-ClientApp';
   isLastMinutes: boolean = false;
   timerCountDown!: number;
+  apiUrl!: string;
 
   constructor(
     private httpClient: HttpClient,
     public appSettingService: AppSettingService,
     public router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private appConfig: AppConfig
 
     ) { }
 
@@ -25,11 +28,14 @@ export class AppComponent implements OnInit {
     //console.log(this.appSettingService.isBeenAMinute);
     
     this.tick();
-    // Use this to run local
-    // const url = `${this.appSettingService.usedApiUrl}oauth/v1/tokens`;
-
+    if(this.appConfig.isRunningLocal) {
+      // Use this to run local
+      this.apiUrl = `${this.appConfig.usedApiUrl}oauth/v1/tokens`;
+    }else{
     // Use this to run Electron
-    const url = `${this.appSettingService.baseOperaApiUrl}oauth/v1/tokens`;
+    // this.apiUrl = `${this.appConfig.baseOperaApiUrl}oauth/v1/tokens`;
+    }
+
     const headers = new HttpHeaders()
       .set('Accept', '*/*')
       .set('Authorization' , `Basic Zmlud2F5X0NsaWVudDo5WGxyVEZYdU44M19aRDFDMzRBUDU0X3A=`)
@@ -37,7 +43,7 @@ export class AppComponent implements OnInit {
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
     const body = 'username=OHIPSB_FINWAY&password=9XlrTFXuN83_ZD1C34AP54_p&grant_type=password';
-    this.httpClient.post(url, body, { headers: headers }).subscribe({
+    this.httpClient.post(this.apiUrl, body, { headers: headers }).subscribe({
       next: (res: any) => {
         console.log(res);
         localStorage.setItem('token', res.access_token);

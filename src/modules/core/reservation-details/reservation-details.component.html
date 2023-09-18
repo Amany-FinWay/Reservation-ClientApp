@@ -30,7 +30,9 @@
         <h5>Room Number</h5>
         <div class="row justify-content-between align-items-center">
           <div class="col-6">
-            <p class="mb-0 text-secondary">{{this.reservationService.reservationDetails!.roomKey}}</p>
+            <p class="mb-0 text-secondary" [ngClass]="{'animate__animated animate__bounceInRight': this.reservationService.reservationDetails!.roomKey}">
+              <span class="badge rounded-pill bg-success p-3 fs-6">{{this.reservationService.reservationDetails!.roomKey}}</span>
+            </p>
           </div>
           <div class="col-6 text-end">
             <button class="btn btn-primary" (click)="onPickRoom()">

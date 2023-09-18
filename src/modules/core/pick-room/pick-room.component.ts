@@ -6,25 +6,25 @@ import { ModalService } from 'src/services/modal.service';
 import { ReservationService } from 'src/services/reservation.service';
 import { Options } from '@popperjs/core';
 @Component({
-  selector: 'app-pick-room',
-  templateUrl: './pick-room.component.html',
-  styleUrls: ['./pick-room.component.scss']
+    selector: 'app-pick-room',
+    templateUrl: './pick-room.component.html',
+    styleUrls: ['./pick-room.component.scss']
 })
 export class PickRoomComponent {
-  @Input() availableRoomsPerFloor!: RoomsPerFloorModel[];
+@Input() availableRoomsPerFloor!: RoomsPerFloorModel[];
 
-  constructor(
+constructor(
     private reservationService: ReservationService,
     public modalService: ModalService
-  ) {}
+) {}
 
-  onPickRoomNumber(roomId: string){
+onPickRoomNumber(roomId: string){
     this.reservationService.reservationDetails!.roomKey = roomId;
     this.modalService.closeModal();
-  }
+}
 
 
-  popperOptions = (options: Partial<Options>) => {
+popperOptions = (options: Partial<Options>) => {
 		// customize placement
 		options.placement = 'bottom';
 

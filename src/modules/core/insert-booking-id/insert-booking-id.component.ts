@@ -9,6 +9,7 @@ import { ReservationService } from 'src/services/reservation.service';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/services/alert.service';
 import { AlertType } from 'src/models/_enums/AlertTypeEnum';
+import { AppConfig } from 'src/environments/AppConfig';
 
 @Component({
   selector: 'app-insert-booking-id',
@@ -17,6 +18,7 @@ import { AlertType } from 'src/models/_enums/AlertTypeEnum';
 })
 export class InsertBookingIdComponent implements OnInit{
   bookingIDForm!: FormGroup;
+  apiUrl!: string;
   constructor
   (
     private virtualKeyboardService: VirtualKeyboardService,
@@ -25,7 +27,8 @@ export class InsertBookingIdComponent implements OnInit{
     private loader: LoadingSpinnerService,
     private reservationService: ReservationService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private appConfig: AppConfig
     ) {}
 
     ngOnInit(): void {
@@ -54,12 +57,13 @@ export class InsertBookingIdComponent implements OnInit{
   onGetReservationDetails(){
     this.loader.start();
     const bookingID = this.bookingIDForm.controls['bookingID'].value;
-    // Use this to run local
-    // const url = `${this.appSettingService.usedApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
-
-    // Use this to run Electron
-    const url = `${this.appSettingService.baseOperaApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
-
+    if(this.appConfig.isRunningLocal) {
+      // Use this to run local
+      this.apiUrl = `${this.appConfig.usedApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
+    } else{
+      // Use this to run Electron
+      this.apiUrl = `${this.appConfig.baseOperaApiUrl}rsv/v1/hotels/SAND01/reservations/${bookingID}?fetchInstructions=Reservation`;
+    }
     const headers = new HttpHeaders()
       .set('Accept', '*/*')
       .set('Authorization' , `Bearer ${localStorage.getItem("token")}`)
@@ -67,7 +71,7 @@ export class InsertBookingIdComponent implements OnInit{
       .set('x-app-key', 'ce0eec0d-a9a2-43d3-9f84-91f10dfd9abb')
       .set('Content-Type', 'application/json');
 
-    this.http.get(url, { headers: headers }).pipe(finalize(() => {
+    this.http.get(this.apiUrl, { headers: headers }).pipe(finalize(() => {
         this.loader.stop();
       })).subscribe({
       next: (res: any) => {
